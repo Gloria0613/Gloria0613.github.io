@@ -7,7 +7,7 @@
   
   
   
-  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://example.com';</script>
+  <script>window.REIMU_CONFIG = {};window.REIMU_CONFIG.icon_font = '4552607_4k4bc36ef96';window.REIMU_CONFIG.clipboard_tips = {"success":{"en":"Copy successfully (*^▽^*)"},"fail":{"en":"Copy failed (ﾟ⊿ﾟ)ﾂ"},"copyright":{"enable":false,"count":50,"license_type":"by-nc-sa"}};window.REIMU_CONFIG.clipboard_tips.copyright.content = 'All articles on this blog are licensed under the BY-NC-SA license agreement unless otherwise stated. Please indicate the source when reprinting!';window.REIMU_CONFIG.code_block = {"expand":true};window.REIMU_CONFIG.base = 'http://Gloria0613.github.io';</script>
   <title>
     DNSlog注入以及内存马注入喵 | Dawn
   </title>
@@ -20,23 +20,23 @@
     <meta name="description" content="DNSlog注入以及内存马注入[TOC] 啊……这部分作为SSTI的一个补充喵 先来看一下DNSlog注入 DNSlog注入DNDlog注入，又称为带外攻击（OOB，Out-of-Band），专门用来应付无回显的一种技术 核心原理在理解DNSlog之前，先来了解一下：当我们在浏览器输入一个域名时，网络上到底发生了什么 假设我们输入gloria.com 我的电脑💻不知道这台服务器的ip，所以向DN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DNSlog注入以及内存马注入喵">
-<meta property="og:url" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:url" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="Dawn">
 <meta property="og:description" content="DNSlog注入以及内存马注入[TOC] 啊……这部分作为SSTI的一个补充喵 先来看一下DNSlog注入 DNSlog注入DNDlog注入，又称为带外攻击（OOB，Out-of-Band），专门用来应付无回显的一种技术 核心原理在理解DNSlog之前，先来了解一下：当我们在浏览器输入一个域名时，网络上到底发生了什么 假设我们输入gloria.com 我的电脑💻不知道这台服务器的ip，所以向DN">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/2.png">
-<meta property="og:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/1.png">
-<meta property="og:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/7.png">
-<meta property="og:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/5.png">
-<meta property="og:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/8.png">
-<meta property="og:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/9.png">
+<meta property="og:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/2.png">
+<meta property="og:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/1.png">
+<meta property="og:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/7.png">
+<meta property="og:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/5.png">
+<meta property="og:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/8.png">
+<meta property="og:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/9.png">
 <meta property="article:published_time" content="2026-06-18T12:50:21.000Z">
 <meta property="article:modified_time" content="2026-06-22T14:09:11.990Z">
 <meta property="article:author" content="Gloria">
 <meta property="article:tag" content="DNSlog注入">
 <meta property="article:tag" content="Web安全">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/2.png">
+<meta name="twitter:image" content="http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/2.png">
     <link rel="alternate" href="/atom.xml" title="Dawn" type="application/atom+xml">
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -127,6 +127,12 @@
           </div>
           <span class="main-nav-link">Friend</span>
         </span>
+        <a class="main-nav-link-wrap" href="/travel">
+          <div class="main-nav-icon icon rotate">
+              &#xe62b;
+          </div>
+          <span class="main-nav-link">travel</span>
+        </span>
     <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
   </nav>
   <nav id="sub-nav" aria-label="Secondary navigation">
@@ -165,7 +171,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Post</div>
-    <div class="sidebar-state-number">20</div>
+    <div class="sidebar-state-number">21</div>
   </div>
   <div class="sidebar-state-category">
     <div>Category</div>
@@ -173,7 +179,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>Tag</div>
-    <div class="sidebar-state-number">13</div>
+    <div class="sidebar-state-number">14</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -206,6 +212,13 @@
             &#xe62b;
         </div>
         <div class="sidebar-menu-link">Friend</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="travel"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">travel</div>
       </div>
 </div>
 </div>
@@ -367,6 +380,14 @@
     </footer>
   </div>
     <nav id="article-nav" aria-label="Article navigation" data-aos="fade-up">
+      <div class="article-nav-link-wrap left">
+          <img data-src="/images/42.jpg" data-sizes="auto" alt="web学习笔记之CSRF喵" class="lazyload">
+        <a href="/2026/08/01/web%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B9%8BCSRF%E5%96%B5/" aria-label="Prev: web学习笔记之CSRF喵" title="Prev: web学习笔记之CSRF喵"></a>
+        <div class="article-nav-caption">Prev</div>
+        <h3 class="article-nav-title">
+            web学习笔记之CSRF喵
+        </h3>
+      </div>
     <div class="article-nav-link-wrap right">
         <img data-src="/images/32.jpg" data-sizes="auto" alt="web做题日记之SSTI喵" class="lazyload">
       <a href="/2026/04/11/web%E5%81%9A%E9%A2%98%E6%97%A5%E8%AE%B0%E4%B9%8BSSTI%E5%96%B5/" aria-label="Next: web做题日记之SSTI喵"  title="Next: web做题日记之SSTI喵"></a>
@@ -420,7 +441,7 @@
         43.7k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:15
+        03:16
       </div>
       <div>
         <span class="icon-eye"></span>
@@ -453,7 +474,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>Post</div>
-    <div class="sidebar-state-number">20</div>
+    <div class="sidebar-state-number">21</div>
   </div>
   <div class="sidebar-state-category">
     <div>Category</div>
@@ -461,7 +482,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>Tag</div>
-    <div class="sidebar-state-number">13</div>
+    <div class="sidebar-state-number">14</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -494,6 +515,13 @@
             &#xe62b;
         </div>
         <div class="sidebar-menu-link">Friend</div>
+      </div>
+      <div class="sidebar-menu-link-wrap">
+        <a class="sidebar-menu-link-dummy" href="/travel" aria-label="travel"></a>
+        <div class="sidebar-menu-icon icon rotate">
+            &#xe62b;
+        </div>
+        <div class="sidebar-menu-link">travel</div>
       </div>
 </div>
 </div>
@@ -563,7 +591,7 @@
         window.REIMU_POST = {
           author: "Gloria",
           title: "DNSlog注入以及内存马注入喵",
-          url: "http://example.com/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/",
+          url: "http://gloria0613.github.io/2026/06/18/DNSlog%E6%B3%A8%E5%85%A5%E4%BB%A5%E5%8F%8A%E5%86%85%E5%AD%98%E9%A9%AC%E6%B3%A8%E5%85%A5/",
           excerpt: "",
           description: "",
           stripContent: "DNSlog注入以及内存马注入[TOC] 啊……这部分作为SSTI的一个补充喵 先来看一下DNSlog注入 DNSlog注入DNDlog注入，又称为带外攻击（OOB，Out-of-Band），专门用来应付无回显的一种技术 核心原理在理解DNSlog之前，先来了解一下：当我们在浏览器输入一个域名时，网络上到底发生了什么 假设我们输入gloria.com 我的电脑💻不知道这台服务器的ip，所以向DNS服务器询问：gloria.com的ip是多少？ 如果这个域名有一台专门的权威DNS服务器，这个询问",

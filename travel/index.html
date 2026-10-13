@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://gloria0613.github.io/images/banner.webp">
 <meta property="article:published_time" content="2026-10-12T11:30:00.000Z">
-<meta property="article:modified_time" content="2026-10-12T13:42:58.297Z">
+<meta property="article:modified_time" content="2026-10-13T13:50:52.607Z">
 <meta property="article:author" content="Gloria">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://gloria0613.github.io/images/banner.webp">
@@ -223,7 +223,7 @@
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
     <time datetime="2026-10-12T11:30:00.000Z" itemprop="datePublished">2026-10-12</time>
-    <time style="display: none;" id="post-update-time">2026-10-12</time>
+    <time style="display: none;" id="post-update-time">2026-10-13</time>
   </span>
 </div>
 
@@ -483,7 +483,7 @@ document.addEventListener("DOMContentLoaded", function() {
     currentMapLevel = 'china';
     backBtn.style.display = 'none';
 
-    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+    fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json', { referrerPolicy: 'no-referrer' })
       .then(res => res.json())
       .then(geoJson => {
         echarts.registerMap('china', geoJson);
@@ -563,7 +563,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (!adcode) return;
 
-    fetch(`https://geo.datav.aliyun.com/areas_v3/bound/${adcode}_full.json`)
+    fetch(`https://geo.datav.aliyun.com/areas_v3/bound/${adcode}_full.json`, { referrerPolicy: 'no-referrer' })
       .then(res => res.json())
       .then(geoJson => {
         currentMapLevel = provName;
@@ -863,7 +863,7 @@ document.addEventListener("DOMContentLoaded", function() {
           description: "",
           stripContent: "      /* 全局容器：浅色清新底色 */   .map-wrapper {     position: relative;     width: 100%;     height: 660px;     background: #f8fafc;     border-radius: 16px;     overflow: hidden;     box-shadow: 0 8px 30px rgba(149, 157, 165, 0.15);     margin-top: 15px;  ",
           date: "Mon Oct 12 2026 19:30:00 GMT+0800",
-          updated: "Mon Oct 12 2026 21:42:58 GMT+0800",
+          updated: "Tue Oct 13 2026 21:50:52 GMT+0800",
           cover: "/images/15.jpg",
         };
       </script>

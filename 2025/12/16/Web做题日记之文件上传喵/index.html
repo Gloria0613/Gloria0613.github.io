@@ -640,6 +640,10 @@
           <span class="post-comments-count valine-comment-count" data-xid="/2025/12/16/Web%E5%81%9A%E9%A2%98%E6%97%A5%E8%AE%B0%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%96%B5/" itemprop="commentCount"></span>
           Comments
         </a>
+        <a data-aos="zoom-in" href="/2025/12/16/Web%E5%81%9A%E9%A2%98%E6%97%A5%E8%AE%B0%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%96%B5/#comments" class="article-comment-link">
+          <span class="post-comments-count twikoo-comment-count" data-path="/2025/12/16/Web%E5%81%9A%E9%A2%98%E6%97%A5%E8%AE%B0%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%96%B5/" itemprop="commentCount"></span>
+          Comments
+        </a>
         <span data-aos="zoom-in" id="/2025/12/16/Web%E5%81%9A%E9%A2%98%E6%97%A5%E8%AE%B0%E4%B9%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%96%B5/" class="leancloud_visitors article-visitor-link" data-flag-title="web做题日记之文件上传喵">
           <span class="leancloud-visitors-count">0</span>
           <em class="post-meta-item-text">Readings</em>
@@ -678,12 +682,18 @@
             <div class="selector-item" data-selector="valine">
               <span>valine</span>
             </div>
+            <div class="selector-item" data-selector="twikoo">
+              <span>twikoo</span>
+            </div>
         </div>
       </div>
     </div>
     <div class="comment-content">
         <div class="comment valine-comment" data-aos="fade-up"
           id="valine-comment">
+        </div>
+        <div class="comment twikoo-comment" data-aos="fade-up"
+          id="twikoo-comment">
         </div>
     </div>
   </section>
@@ -905,7 +915,7 @@
     return script;
   };
 
-  var commentConfigKeys = ["valine"];
+  var commentConfigKeys = ["valine","twikoo"];
   var commentConfig = {
     valine: {
       enable: true,
@@ -947,6 +957,44 @@
             });
           }
         };
+        document.head.appendChild(script);
+      }
+    },
+    twikoo: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.44/dist/twikoo.all.min.js',
+          'sha384-kwWLC0HjeZZnVPqCJ1AncI8tsk+kQqF9TbAmCclcc9Z0hGkfgHRzeQZxmdmZhE0K'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: 'https://gloria-red.vercel.app',
+              el: '.twikoo-comment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            });
+
+            twikoo.getCommentsCount({
+              envId: 'https://gloria-red.vercel.app',
+              region: '',
+              urls: [
+                '/about/index.html'
+              ],
+              includeReply: false
+            }).then((res) => {
+              _$('.twikoo-comment-count').innerText = res[0].count;
+            }).catch((err) => {
+              console.error(err);
+            });
+          }
+        } 
         document.head.appendChild(script);
       }
     },

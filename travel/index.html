@@ -26,7 +26,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://gloria0613.github.io/images/banner.webp">
 <meta property="article:published_time" content="2026-10-12T11:30:00.000Z">
-<meta property="article:modified_time" content="2026-10-13T13:50:52.607Z">
+<meta property="article:modified_time" content="2026-10-14T14:29:59.942Z">
 <meta property="article:author" content="Gloria">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://gloria0613.github.io/images/banner.webp">
@@ -223,7 +223,7 @@
       <div class="article-date">
   <span class="article-date-link icon-calendar" data-aos="zoom-in">
     <time datetime="2026-10-12T11:30:00.000Z" itemprop="datePublished">2026-10-12</time>
-    <time style="display: none;" id="post-update-time">2026-10-13</time>
+    <time style="display: none;" id="post-update-time">2026-10-14</time>
   </span>
 </div>
 
@@ -688,12 +688,48 @@ document.addEventListener("DOMContentLoaded", function() {
 
     </div>
     <footer class="article-footer">
+        <a data-aos="zoom-in" href="/travel/index.html#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/travel/" itemprop="commentCount"></span>
+          Comments
+        </a>
+        <a data-aos="zoom-in" href="/travel/index.html#comments" class="article-comment-link">
+          <span class="post-comments-count twikoo-comment-count" data-path="/travel/index.html" itemprop="commentCount"></span>
+          Comments
+        </a>
+        <span data-aos="zoom-in" id="/travel/" class="leancloud_visitors article-visitor-link" data-flag-title="Travel~">
+          <span class="leancloud-visitors-count">0</span>
+          <em class="post-meta-item-text">Readings</em>
+        </span>
       
     </footer>
   </div>
   
 </article>
 
+  <section id="comments" data-aos="fade-up">
+    <div class="comment-header">
+        
+      <h2 class="comment-title">Leave a comment</h2>
+      <div class="comment-selector">
+        <div class="comment-selector-wrap">
+            <div class="selector-item" data-selector="valine">
+              <span>valine</span>
+            </div>
+            <div class="selector-item" data-selector="twikoo">
+              <span>twikoo</span>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="comment-content">
+        <div class="comment valine-comment" data-aos="fade-up"
+          id="valine-comment">
+        </div>
+        <div class="comment twikoo-comment" data-aos="fade-up"
+          id="twikoo-comment">
+        </div>
+    </div>
+  </section>
 
 </section>
         </div>
@@ -863,7 +899,7 @@ document.addEventListener("DOMContentLoaded", function() {
           description: "",
           stripContent: "      /* 全局容器：浅色清新底色 */   .map-wrapper {     position: relative;     width: 100%;     height: 660px;     background: #f8fafc;     border-radius: 16px;     overflow: hidden;     box-shadow: 0 8px 30px rgba(149, 157, 165, 0.15);     margin-top: 15px;  ",
           date: "Mon Oct 12 2026 19:30:00 GMT+0800",
-          updated: "Tue Oct 13 2026 21:50:52 GMT+0800",
+          updated: "Wed Oct 14 2026 22:29:59 GMT+0800",
           cover: "/images/15.jpg",
         };
       </script>
@@ -893,6 +929,208 @@ document.addEventListener("DOMContentLoaded", function() {
           window.addEventListener('lightbox:ready', pswp);
         }
       </script>
+        
+<script data-pjax>
+  var loadScript = (src, integrity) => {
+    const script = document.createElement('script');
+    script.src = src;
+    if (integrity) script.integrity = integrity;
+    script.crossOrigin = 'anonymous';
+    return script;
+  };
+
+  var commentConfigKeys = ["valine","twikoo"];
+  var commentConfig = {
+    valine: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.valine-comment');
+        if (!container) return;
+        if (container.style.display === 'block') return; // already loaded
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/valine@1.5.1/dist/Valine.min.js',
+          'sha384-3ma91AExDeMAZ1rjTjaP8V2A2obQE+s5ltKRwYlwdpArz9xVbp0tF3b0VV2ACNPn'
+        );
+        script.onload = () => {
+          var GUEST_INFO = ['nick', 'mail', 'link'];
+          var guest_info = 'nick,mail,link'.split(',').filter((item) => {
+            return GUEST_INFO.indexOf(item) > -1
+          });
+          var recordIP = JSON.parse('true');
+          var highlight = JSON.parse('true');
+          var visitor = JSON.parse('true');
+          var serverURLs = undefined;
+
+          if (window.Valine) {
+            new Valine({
+              el: '.valine-comment',
+              appId: "kvVONbiLMyDuTRiZvZ1bTwdK-gzGzoHsz",
+              appKey: "3n0P97K1hXTVGGSYeh03GY57",
+              placeholder: "说点什么喵",
+              pageSize: '10',
+              avatar: 'mp',
+              lang: document.documentElement.lang || 'en',
+              recordIP: recordIP,
+              highlight: highlight,
+              visitor: visitor,
+              requiredFields: guest_info,
+              path: window.location.pathname,
+              serverURLs
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+    },
+    twikoo: {
+      enable: true,
+      load: () => {
+        const container = document.querySelector('.twikoo-comment');
+        if (!container) return;
+        container.style.display = 'block';
+
+        const script = loadScript(
+          'https://npm.webcache.cn/twikoo@1.6.44/dist/twikoo.all.min.js',
+          'sha384-kwWLC0HjeZZnVPqCJ1AncI8tsk+kQqF9TbAmCclcc9Z0hGkfgHRzeQZxmdmZhE0K'
+        );
+
+        script.onload = () => {
+          if (window.twikoo) {
+            twikoo.init({
+              envId: 'https://gloria-red.vercel.app',
+              el: '.twikoo-comment',
+              region: '',
+              lang: document.documentElement.lang || 'en',
+            });
+
+            twikoo.getCommentsCount({
+              envId: 'https://gloria-red.vercel.app',
+              region: '',
+              urls: [
+                '/about/index.html'
+              ],
+              includeReply: false
+            }).then((res) => {
+              _$('.twikoo-comment-count').innerText = res[0].count;
+            }).catch((err) => {
+              console.error(err);
+            });
+          }
+        } 
+        document.head.appendChild(script);
+      }
+    },
+  }
+  commentConfig.enable = commentConfigKeys.some(key => commentConfig[key].enable);
+
+  var defaultComment = '';
+  if (commentConfig.enable) {
+    // 1. 首先检查localStorage中是否有保存的评论类型
+    var savedCommentType = localStorage.getItem('commentType');
+    
+    // 2. 如果localStorage中有值且对应的评论系统可用，就使用它
+    if (savedCommentType) {
+      if (commentConfig[savedCommentType]?.enable) {
+        defaultComment = savedCommentType;
+      }
+    }
+    
+    // 3. 如果localStorage无效，检查配置的默认评论系统
+    if (!defaultComment) {
+      var configDefault = 'waline';
+      if (commentConfig[configDefault]?.enable) {
+        defaultComment = configDefault;
+      }
+    }
+    
+    // 4. 如果前两项都无效，按指定顺序找到第一个可用的评论系统
+    if (!defaultComment) {
+      defaultComment = commentConfigKeys.find(sys => commentConfig[sys].enable) || '';
+    }
+  }
+  function loadComments() {
+    if (!commentConfig.enable) return;
+    const loadedComments = {
+      valine: false,
+      waline: false,
+      twikoo: false,
+      gitalk: false,
+      giscus: false
+    };
+
+    // 隐藏所有评论容器
+    const hideAllComments = () => {
+      const commentContainers = document.querySelectorAll('.comment');
+      commentContainers.forEach(container => {
+        container.style.display = 'none';
+      });
+    };
+
+    // 按需加载评论系统
+    const loadCommentSystem = (type) => {
+      if (loadedComments[type]) {
+        // 如果已加载，只需显示对应容器
+        document.querySelector(`.${type}-comment`).style.display = 'block';
+        return;
+      }
+
+      // 根据类型加载对应的脚本
+      commentConfig[type]?.load();
+      loadedComments[type] = true;
+    };
+
+    // 评论组件选择器
+    const changeActiveCommentItems = (item) => {
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let i = 0; i < commentItems.length; i++) {
+        commentItems[i].classList.remove('active');
+      }
+      item.classList.add('active');
+
+      // 获取要加载的评论系统类型
+      const commentType = item.getAttribute('data-selector');
+
+      // 隐藏所有评论系统
+      hideAllComments();
+
+      // 加载选中的评论系统
+      loadCommentSystem(commentType);
+    };
+
+    const commentInit = () => {
+      // 评论组件选择器点击事件
+      const commentItems = document.querySelectorAll('.selector-item');
+      for (let item of commentItems) {
+        item.addEventListener('click', () => {
+          // 保存选择器状态
+          const commentType = item.getAttribute('data-selector');
+          window.localStorage.setItem('commentType', commentType);
+          // 切换选中状态
+          changeActiveCommentItems(item);
+        });
+      }
+
+      // 检查是否需要加载默认评论系统
+      if (defaultComment) {
+        const defaultSelectorItem = document.querySelector(`[data-selector="${defaultComment}"]`);
+        if (!defaultSelectorItem) return;
+        defaultSelectorItem.style.display = 'block';
+        defaultSelectorItem.classList.add('active');
+        loadCommentSystem(defaultComment);
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', commentInit);
+    } else {
+      commentInit();
+    }
+  };
+  loadComments();
+</script>
+
   </div>
 </div>
 
